@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+home='$home/mysrc/tmux-startup'
+
+python $home/tmux-start.py $1
