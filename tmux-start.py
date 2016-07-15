@@ -20,7 +20,7 @@ def main():
         raise Exception("No such session is implemented.")
 
     output, _ = call_command('tmux list-sessions')
-    if session_name in output:
+    if session_name in str(output):
         call_command('tmux attach -t ' + session_name)
     else:
         session_fn()
@@ -37,7 +37,7 @@ def hack():
         "tmux neww -n ranger",
         "tmux send-keys -t ranger 'ranger' enter",
         "tmux neww -n zsh",
-        "tmux send-keys -t zsh '~/bin/dna' enter",
+        "tmux send-keys -t zsh 'fortune | cowthink -f skeleton | lolcat' enter",
         "tmux attach -t hack",
    ]
 
