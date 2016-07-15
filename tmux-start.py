@@ -49,7 +49,9 @@ def hack():
         output, _ = call_command(command)
 
 # Global variable for implemented session functions. Has to be after functions.
-SESSIONS = {'hack': hack,}
+SESSIONS = {
+    'hack': hack,
+}
 
 def call_command(command):
     process = subprocess.Popen(shlex.split(command),
