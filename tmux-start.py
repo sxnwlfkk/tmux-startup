@@ -45,16 +45,29 @@ def hack():
         "tmux attach -t hack",
    ]
 
-    #hack_path = "/home/cs/mysrc/tmux-startup/tmux-hack"
-    #output, _ = call_command("tmux new -d")
-    #call_command(hack_path)
+    for command in command_list:
+        output, _ = call_command(command)
+
+
+def work():
+
+    command_list = [
+        "tmux new -d",
+        "tmux new-session -s work -n ranger -d",
+        "tmux send-keys -t ranger 'ranger' enter",
+        "tmux neww -n zsh",
+        "tmux send-keys -t zsh 'fortune | cowthink -f skeleton | lolcat' enter",
+        "tmux attach -t work",
+    ]
 
     for command in command_list:
         output, _ = call_command(command)
 
+
 # Global variable for implemented session functions. Has to be after functions.
 SESSIONS = {
     'hack': hack,
+    'work': work,
 }
 
 def call_command(command):
