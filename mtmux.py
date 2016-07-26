@@ -18,7 +18,7 @@ def main():
     group.add_argument('-s', '--start', action='store_true')
     group.add_argument('-e', '--exit', action='store_true')
 
-    parser.add_argument('session', 
+    parser.add_argument('session', choices=['hack', 'work'],
                         help='Will use this predefined session. Implemented: hack, work')
 
     args = parser.parse_args()
@@ -81,10 +81,7 @@ def tm_start(session):
         'work': work,
     }
 
-    if session in SESSIONS:
-        session_fn = SESSIONS[session]
-    else:
-        raise Exception("No such session is implemented.")
+    session_fn = SESSIONS[session]
 
     output, _ = call_command('tmux list-sessions')
     if session in str(output):
@@ -114,10 +111,7 @@ def tm_exit(session):
         'work': work,
     }
 
-    if session in SESSIONS:
-        session_fn = SESSIONS[session]
-    else:
-        raise Exception('No such session is implemented.')
+    session_fn = SESSIONS[session]
 
     output, _ = call_command('tmux list-sessions')
     if session in str(output):
