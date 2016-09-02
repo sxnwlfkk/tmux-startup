@@ -51,6 +51,8 @@ def tm_start(session):
             "tmux send-keys -t mail 'alpine' enter",
             "tmux neww -n news",
             "tmux send-keys -t news 'newsbeuter' enter",
+            "tmux neww -n gcal",
+            "tmux send-keys -t gcal 'gcal calw' enter",
             "tmux neww -n zsh",
             "tmux send-keys -t zsh 'fortune | cowthink -f skeleton | lolcat' enter",
             "tmux attach -t hack",
