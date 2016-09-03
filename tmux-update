@@ -1,0 +1,4 @@
+#! /bin/zsh
+
+cp ~/mysrc/tmux-startup/mtmux.py ~/bin/mtmux.py
+echo "Mtmux update done."

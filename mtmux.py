@@ -18,8 +18,8 @@ def main():
     group.add_argument('-s', '--start', action='store_true')
     group.add_argument('-e', '--exit', action='store_true')
 
-    parser.add_argument('session', choices=['hack', 'work'],
-                        help='Will use this predefined session. Implemented: hack, work')
+    parser.add_argument('session', choices=['hack', 'work', 'wargame'],
+                        help='Will use this predefined session. Implemented: hack, work, wargame')
 
     args = parser.parse_args()
 
@@ -35,7 +35,6 @@ def main():
 
 
 def tm_start(session):
-
 
     def hack():
 
@@ -61,7 +60,6 @@ def tm_start(session):
         for command in command_list:
             output, _ = call_command(command)
 
-
     def work():
 
         command_list = [
@@ -77,10 +75,27 @@ def tm_start(session):
             output, _ = call_command(command)
 
 
+    def wargame():
+
+        command_list = [
+            "tmux new -d",
+            "tmux new-session -s wargame -n ssh -d",
+            "tmux send-keys -t wargame 'fortune | cowthink -f skeleton | lolcat' enter",
+            "tmux neww -n vim",
+            "tmux send-keys -t vim 'vim' enter",
+            "tmux neww -n man",
+            "tmux attach -t wargame"
+        ]
+
+        for command in command_list:
+            output, _ = call_command(command)
+
+
     # Global variable for implemented session functions. Has to be after functions.
     SESSIONS = {
         'hack': hack,
         'work': work,
+        'wargame': wargame,
     }
 
     session_fn = SESSIONS[session]
